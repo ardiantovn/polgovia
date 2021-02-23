@@ -1,1 +1,1 @@
-web: sh setup.sh && streamlit run livefuncNG.py
+web: sh setup.sh && streamlit run likeNG.py
