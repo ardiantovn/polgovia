@@ -59,9 +59,9 @@ def crawlFunc(apiKey,qStr,artCount,saved):
     res = er.execQuery(q)
     resCount=res["articles"]["totalResults"]
     df=pd.DataFrame(res['articles']['results'])
-    st.write("CRAWLING %d ARTICLE %d TOTAL ARTICLE"%(artCount,resCount))
-    st.write("DONE !")
-    csv_desktop(df, saved)
+    st.write("Crawling %d article from %d total article"%(artCount,resCount))
+    st.write("DONE ! DOWNLOAD FILE USE LINK BELOW!")
+    st.markdown(csv_link(df, saved), unsafe_allow_html=True)
     st.markdown("### DATAFRAME PREVIEW")
     st.dataframe(df.head(10))
     return
@@ -1221,9 +1221,7 @@ def plotLabelIsu(df,plotStat=True):
 
 def saveDFPlot(df,saved):
     output = BytesIO()
-    st.write("output")
     writer = pd.ExcelWriter(output, engine='xlsxwriter')
-    st.write("writerOpen")
     try:
         sBarTime(df,plotStat=False).to_excel(writer, "Timeline by Month", index=False)
     except:
@@ -1277,9 +1275,6 @@ def saveDFPlot(df,saved):
     except:
         pass
     writer.save()
-    st.write("writerSave")
     val = output.getvalue()
-    st.write("val")
     b64 = base64.b64encode(val).decode()
-    st.write("b64")
     return f'<a href="data:file/txt;base64,{b64}" download="{saved}">Download Excel File</a>'
