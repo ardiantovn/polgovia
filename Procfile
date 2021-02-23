@@ -1,1 +1,1 @@
-web: sh setup.sh && streamlit run likeNG.py
+web: sh setup.sh && streamlit run polgovia.py
