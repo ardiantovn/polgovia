@@ -766,10 +766,11 @@ def savePlotExcel(df):
     st.markdown("---")
     st.markdown("""#### ***SAVE PLOT FILE TO EXCEL***""")
     saved = st.text_input("Filename", "")+"_plot.xlsx"
-    desktop = os.path.join(os.path.join(os.path.expanduser('~')), 'Desktop')
+    #desktop = os.path.join(os.path.join(os.path.expanduser('~')), 'Desktop')
     #saved2=str(desktop)+'/'+saved
     if len(saved)>10:
-        st.markdown(excel_link(df, saved), unsafe_allow_html=True)
+        st.markdown(saveDFPlot(df,saved),unsafe_allow_html=True)
+            #st.write("SAVED TO: " +saved2)
     return
 
 def csv_desktop(df, saved):
@@ -1219,7 +1220,8 @@ def plotLabelIsu(df,plotStat=True):
     return dfLabelIsu
 
 def saveDFPlot(df,saved):
-    writer = pd.ExcelWriter(saved)
+    output = BytesIO()
+    writer = pd.ExcelWriter(output, engine='xlsxwriter')
     try:
         sBarTime(df,plotStat=False).to_excel(writer, "Timeline by Month", index=False)
     except:
@@ -1273,4 +1275,6 @@ def saveDFPlot(df,saved):
     except:
         pass
     writer.save()
-    return
+    val = output.getvalue()
+    b64 = base64.b64encode(val).decode()
+    return f'<a href="data:file/txt;base64,{b64}" download="{saved}">Download Excel File</a>'
