@@ -1,4 +1,4 @@
-from livefunc import *
+from livefuncNG import *
 
 selectedOpsi= selectApp()
 headCont = st.beta_container()
