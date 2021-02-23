@@ -24,7 +24,7 @@ def selectApp():
 
 def header():
     #image
-    image = Image.open('/Users/array/Documents/labBD/GoogleCredential/logo-polgov.png')
+    image = Image.open('logo-polgov.png')
     st.image(image, width=200, height=100)
 
     #HEADER
