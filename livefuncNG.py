@@ -767,13 +767,9 @@ def savePlotExcel(df):
     st.markdown("""#### ***SAVE PLOT FILE TO EXCEL***""")
     saved = st.text_input("Filename", "")+"_plot.xlsx"
     desktop = os.path.join(os.path.join(os.path.expanduser('~')), 'Desktop')
-    saved2=str(desktop)+'/'+saved
-    if len(saved)>5:
-        if st.button("SAVE"):
-            try:
-                st.markdown(excel_link(df, saved), unsafe_allow_html=True)
-            except:
-                st.write("CANNOT DOWNLOAD FILE")
+    #saved2=str(desktop)+'/'+saved
+    if len(saved)>10:
+        st.markdown(excel_link(df, saved), unsafe_allow_html=True)
     return
 
 def csv_desktop(df, saved):
